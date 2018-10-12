@@ -13,6 +13,27 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
     /**
      * Creates new form multipleChoiceSummativeForm
      */
+    
+    final String Q1 = "What is the atomic number of tungsten?";
+    final String A1 = "74";
+    final String Q2 = "What year did World War 1 end?";
+    final String A2 = "1918";
+    final String Q3 = "How many Harry Potter novels are there?";
+    final String A3 = "7";
+    final String Q4 = "What is 7 + 8?";
+    final String A4 = "15";
+    final String Q5 = "What is Mr. Kaune's room number?";
+    final String A5 = "303";
+    
+    int question = 0;
+    String correctAnswer;
+    int random1, random2, random3;
+    int numCorrect = 0;
+    int numIncorrect = 0;
+    double percentCor = 0;
+    
+    
+    
     public multipleChoiceSummativeForm() {
         initComponents();
     }
@@ -48,6 +69,8 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
         numCorrectLabel = new javax.swing.JLabel();
         numIncorrectLabel = new javax.swing.JLabel();
         percentCorrectLabel = new javax.swing.JLabel();
+        startLabel = new javax.swing.JLabel();
+        answerLabel = new javax.swing.JLabel();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -116,6 +139,10 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
         percentCorrectLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         percentCorrectLabel.setText("0%");
 
+        startLabel.setText("Press the ENTER button to start.");
+
+        answerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -161,15 +188,22 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
                                 .addComponent(numIncorrectTitleLabel1)
                                 .addGap(57, 57, 57)
-                                .addComponent(percentCorrectLabel)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(percentCorrectLabel))
+                            .addComponent(answerLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(38, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(startLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addComponent(startLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(questionTitleLabel)
                     .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,7 +228,9 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
                     .addComponent(answerPromptLabel)
                     .addComponent(userAnswerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enterButton))
-                .addGap(56, 56, 56)
+                .addGap(18, 18, 18)
+                .addComponent(answerLabel)
+                .addGap(24, 24, 24)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numCorrectTitleLabel)
                     .addComponent(numCorrectLabel))
@@ -219,7 +255,7 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addGap(0, 69, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,7 +266,46 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_userAnswerTextActionPerformed
 
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterButtonActionPerformed
-        // TODO add your handling code here:
+        startLabel.setText("");
+        question++;
+        
+        if(question == 1){
+            questionLabel.setText(Q1);
+            random1 = (int)(Math.round(Math.random()*15) + 1);
+            random2 = (int)(Math.round(Math.random()*30)+17);
+            random3 = (int)(Math.round(Math.random()*20)+76);
+            correctAnswer = "b";
+            
+            aLabel.setText("" + random1);
+            bLabel.setText(A1);
+            cLabel.setText("" + random3);
+            dLabel.setText("" + random2);            
+        }else if(question == 2){
+            
+            if(userAnswerText.getText().equals(correctAnswer)){
+                answerLabel.setText("Congratulations! That was the correct answer!");
+                numCorrect++;
+                numCorrectLabel.setText("" + numCorrect);
+            }else{
+                answerLabel.setText("Incorrect. The answer was " + correctAnswer + ".");
+                numIncorrect++;
+                numIncorrectLabel.setText("" + numCorrect);
+            }
+            percentCor = Math.round(((double)numCorrect/(double)(question-1)*100));
+            percentCorrectLabel.setText("" + percentCor);
+            
+            questionLabel.setText(Q2);
+            random1 = (int)(Math.round(Math.random()*15) + 1900);
+            random2 = (int)(Math.round(Math.random()*40)+1918);
+            random3 = (int)(Math.round(Math.random()*60)+1930);
+            correctAnswer = "c";
+            
+            aLabel.setText("" + random2);
+            bLabel.setText("" + random1);
+            cLabel.setText(A2);
+            dLabel.setText("" + random3);       
+        }
+        
     }//GEN-LAST:event_enterButtonActionPerformed
 
     /**
@@ -271,6 +346,7 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aLabel;
     private javax.swing.JLabel aTitleLabel;
+    private javax.swing.JLabel answerLabel;
     private javax.swing.JLabel answerPromptLabel;
     private javax.swing.JLabel bLabel;
     private javax.swing.JLabel bTitleLabel;
@@ -289,6 +365,7 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
     private javax.swing.JLabel percentCorrectLabel;
     private javax.swing.JLabel questionLabel;
     private javax.swing.JLabel questionTitleLabel;
+    private javax.swing.JLabel startLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField userAnswerText;
     // End of variables declaration//GEN-END:variables
