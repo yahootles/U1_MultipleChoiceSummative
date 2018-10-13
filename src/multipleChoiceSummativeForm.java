@@ -304,6 +304,7 @@ public class multipleChoiceSummativeForm extends javax.swing.JFrame {
             bLabel.setText("" + random1);
             cLabel.setText(A2);
             dLabel.setText("" + random3);       
+            //hi
         }
         
     }//GEN-LAST:event_enterButtonActionPerformed
